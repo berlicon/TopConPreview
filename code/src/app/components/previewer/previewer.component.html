@@ -1,0 +1,52 @@
+<div class="k-overlay" *ngIf="opened"></div>
+<div class="example-wrapper">
+    <button kendoButton (click)="onOpen()">Open preview</button>
+
+    <kendo-window 
+        class="wrapper"
+        *ngIf="opened" 
+        (close)="onClose()" 
+        [minWidth]="250">
+        <kendo-window-titlebar>
+            <div class='k-window-title'>
+                <button kendoButton (click)="onClose()" [icon]="'arrow-left'" [look]="'bare'"></button>&nbsp;
+                <span class="k-icon k-i-file-txt" style="color: #FFC62F"></span>&nbsp;
+                <span>{{title}}</span>
+            </div>
+            <button kendoButton (click)="onPrint($event)" [icon]="'print'" [look]="'bare'"></button>
+            <button kendoButton (click)="onDownload($event)" [icon]="'download'" [look]="'bare'"></button>
+            <button kendoWindowMaximizeAction></button>
+            <button kendoWindowRestoreAction></button>
+            <button kendoWindowCloseAction></button>
+        </kendo-window-titlebar>
+
+        <kendo-scrollview
+            [data]="items"
+            [width]="width"
+            [height]="height"
+            [arrows]="true"
+            (itemChanged)="onItemChanged($event)"
+            [endless]="true"
+            [pageable]="true">
+                <ng-template let-item="item">
+                <div *ngIf="item">
+                    <h2 class="demo-title">{{item.author}}</h2>
+                    <img src='{{item.download_url}}' alt='{{item.author}}' [ngStyle]="{'width': picWidth + '%', 'height': picHeight + '%'}" draggable="false" />
+                </div>
+                </ng-template>
+        </kendo-scrollview>
+
+        <br/>
+        <div class="text-center">
+            <span style="background-color: #333333; color: White; padding: 10px; font-weight: bold">
+                Page {{index + 1}} / {{items.length}}
+            </span>
+            &nbsp;
+            <span style="background-color: #333333; color: White; padding: 10px; font-weight: bold">
+                <button kendoButton (click)="onMinus()" [icon]="'minus'" [look]="'bare'"></button>
+                &nbsp;Zoom&nbsp;
+                <button kendoButton (click)="onPlus()" [icon]="'plus'" [look]="'bare'"></button>
+            </span>
+        </div>
+    </kendo-window>
+</div>
