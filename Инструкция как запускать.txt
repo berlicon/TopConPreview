@@ -1,0 +1,3 @@
+1. в CMD перейти в папку с исходным кодом cd G:\My\_Projects\TopConPreview\preview
+2. выполнить команду npm install
+3. выполнить команду ng serve --open
